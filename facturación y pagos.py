@@ -15,10 +15,10 @@ while True:
     try:
         menu = int(input("Seleccione su opción: "))
         while menu == 1:
-            print("Haz pagado", "cantidad")
+            print("Haz pagado", cantidad)
             break
         while menu == 2:
-            print("Se ha descontado ", "cantidad", "de su cuenta.")
+            print("Se ha descontado ", cantidad, "de su cuenta.")
             break
         continuar = input("¿Desea continuar en este menú?(S/N): ").upper()
         if continuar.lower() != "s":
