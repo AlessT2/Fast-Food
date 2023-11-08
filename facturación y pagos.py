@@ -4,8 +4,8 @@ def crear_factura(information, header, string):
     information.append(header)
     string = self.name + "; " + self.last_name + "; " + self.nit + "; " + self.menu_name + "; " + self.menu_description + "; " + self.menu_price + "\n"
     information.append(string)
-    print("information almacenados correctamente")
-    archive = open("Series favoritas.pdf", "w")
+    print("Datos almacenados correctamente")
+    archive = open("Factura.csv", "w")
     archive.writelines(information)
     archive.close()
 
