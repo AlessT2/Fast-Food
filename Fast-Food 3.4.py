@@ -1,4 +1,5 @@
 vector_menus = []
+vector_drinks = []
 vector_order = []
 
 class Customers:
@@ -24,23 +25,35 @@ class Menus:
         self.menu_description = menu_description
         self.menu_price = menu_price
 
-    def data_entry(self):
+    def menu_entry(self):
         print("Ingreso de Menús")
         self.menu_name = input("Ingrese el nombre del menú: ")
         self.menu_description = input("Ingrese una breve descripcion del menú: ")
         self.menu_price = int(input("Ingrese el precio del Menú: "))
+        print("Menú registrado exitosamente")
 
-def mod_menu_name(name):
-        print("Modificar nombre del Menú")
-        #while not vector_menus.empty():
-        for menu in vector_menus:
-            if menu.menu_name == name:
-                print("El menú entero es: ",menu)
-                new_menu_name = input("Ingrese el nuevo nombre del menú: ")
-                new_menu_name = menu.menu_name
-                return print("El nuevo nombre del menú es: ",new_menu_name)
-        #else:
-        #    return print("NO se a ingresado ningún menu")
+def mod_menu_name(menu_name):
+    print("Modificar nombre del Menú")
+    #while not vector_menus.empty():
+    for menu in vector_menus:
+        if menu.menu_name == menu_name:
+            menu.menu_name = input("Ingrese el nuevo nombre del menú: ")
+            return "El nuevo nombre del menú es: ",menu.menu_name
+    else:
+        return "El nombre del menú ingresado aún no ha sido registrado"
+
+
+class Drinks:
+    def __init__(self, drink_name=0, drink_price=0):
+        self.drink_name = drink_price
+        self.drink_price = drink_price
+
+    def drink_entry(self):
+        print("Ingreso de bebidas")
+        self.drink_name = input("Ingrese el nombre de la bebida: ")
+        self.drink_price = int(input("ingrese el precio de la bebida: "))
+        print("La bebida se registro exitosamente")
+
 
 while True:
     print("Roles")
@@ -51,15 +64,22 @@ while True:
         if roles == 1:
             print("Acciones de empleados")
             print("1. Agregar Menus")
-            print("2. Modificar nombre del menus")
-            print("3. Modificar precio del menu")
+            print("2. Agregar Bebidas")
+            print("3. Modificar nombre del menus")
+            print("4. Modificar precio del menu")
             try:
                 employee_actions = int(input("Ingrese que acción desea realizar: "))
                 if employee_actions == 1:
                     menu = Menus()
-                    menu.data_entry()
-                    vector_menus.append(menu)
+                    vector_menus.append(menu.menu_entry())
+                    #menu.menu_entry()
+                    #vector_menus.append(menu)
                 elif employee_actions == 2:
+                    drink = Drinks()
+                    vector_drinks.append(drink.drink_entry())
+                    #drink.drink_entry()
+                    #vector_drinks.append(drink)
+                elif employee_actions == 3:
                     menu_name = input("Ingrese el nombre del menú que desea modificar: ")
                     print(mod_menu_name(menu_name))
                 else:
