@@ -1,13 +1,13 @@
-def crear_factura(datos, encabezado, cadena):
-    datos = []
-    encabezado = "datos\n"
-    datos.append(encabezado)
-    cadena = "nombre" + "; " + "apellido" + "; " + "numero pedido" + "; " + "comida" + "\n"
-    datos.append(cadena)
-    print("Datos almacenados correctamente")
-    archivo = open("Series favoritas.pdf", "w")
-    archivo.writelines(datos)
-    archivo.close()
+def crear_factura(information, header, string):
+    information = []
+    header = "Nombre; Apellido; NIT; Nombre de menú; Descripción del menú; Precio del menú\n"
+    information.append(header)
+    string = self.name + "; " + self.last_name + "; " + self.nit + "; " + self.menu_name + "; " + self.menu_description + "; " + self.menu_price + "\n"
+    information.append(string)
+    print("information almacenados correctamente")
+    archive = open("Series favoritas.pdf", "w")
+    archive.writelines(information)
+    archive.close()
 
 while True:
     print("///Escoja su tipo de pago///")
