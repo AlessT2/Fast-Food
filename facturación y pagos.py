@@ -1,3 +1,14 @@
+def crear_factura(datos, encabezado, cadena):
+    datos = []
+    encabezado = "datos\n"
+    datos.append(encabezado)
+    cadena = "nombre" + "; " + "apellido" + "; " + "numero pedido" + "; " + "comida" + "\n"
+    datos.append(cadena)
+    print("Datos almacenados correctamente")
+    archivo = open("Series favoritas.pdf", "w")
+    archivo.writelines(datos)
+    archivo.close()
+
 while True:
     print("///Escoja su tipo de pago///")
     menu = input("1. Efectivo."
