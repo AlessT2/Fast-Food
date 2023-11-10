@@ -68,7 +68,6 @@ def add_order_queue():
     print("2. Pedido en preparación")
     print("3. Marcar pedido más antiguo listo para servir")
     try:
-        #first_order = order_queue.get()
         order_actions = int(input("Ingrese que acción desea realizar: "))
         if order_actions == 1:
             print("Los pedidos pendientes son: ",len(order_queue.queue))
@@ -98,14 +97,11 @@ while True:
                 employee_actions = int(input("Ingrese que acción desea realizar: "))
                 menu = Menus()
                 if employee_actions == 1:
-                    #menu = Menus()
                     menu.menu_entry()
                     vector_menus.append(menu)
                 elif employee_actions == 2:
                     drink = Drinks()
                     vector_drinks.append(drink.drink_entry())
-                    #drink.drink_entry()
-                    #vector_drinks.append(drink)
                 elif employee_actions == 3:
                     mod_menu_price()
                 elif employee_actions == 4:
