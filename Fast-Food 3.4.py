@@ -34,13 +34,9 @@ class Menus:
         self.menu_price = int(input("Ingrese el precio del Menú: "))
         print("Menú registrado exitosamente")
 
-    def mod_menu_name(self):
-        print("Modificar precio del menú")
-        search = input("ingrese el nombre del menú al que le quiere cambiar el precio: ")
-        for menu in vector_menus:
-            if search == self.menu_price:
-                self.menu_price = int(input("Ingrese el nuevo precio del menú"))
-                print("Ahora el precio del menu", self.menu_name, " es : ",self.menu_price)
+    def mod_menu_price(self):
+        self.menu_price = int(input("Ingrese el nuevo precio del menú: "))
+        print("El nuevo precio para el menú ",self.menu_name, "es: ",self.menu_price)
 
 
 class Drinks:
@@ -54,15 +50,17 @@ class Drinks:
         self.drink_price = int(input("ingrese el precio de la bebida: "))
         print("La bebida se registro exitosamente")
 
-#def mod_menu_name(menu_name):
-#    print("Modificar precio del Menú")
-#    #while not vector_menus.empty():
-#    for menu in vector_menus:
-#        if menu.menu_name == menu_name:
-#            menu.menu_price = int(input("Ingrese el nuevo precio del menú: "))
-#            return "El nuevo precio del menú es: ",menu.menu_name
-#    else:
-#        return "El nombre del menú ingresado aún no ha sido registrado"
+def mod_menu_price():
+    print("Modificar precio del Menú")
+    while not len(vector_menus) == 0:
+        search = input("Ingrese el nombre del menú al que le quiere cambiar el nombre: ")
+        for menu in vector_menus:
+            if menu.menu_name == search:
+                menu.mod_menu_price()
+        else:
+            print("El menú con el nombre ingresado aún no ha sido registrado")
+    else:
+        return "Aún no se han registrado menús"
 
 def add_order_queue():
     print("Acciones de pedidos")
@@ -98,9 +96,9 @@ while True:
 
             try:
                 employee_actions = int(input("Ingrese que acción desea realizar: "))
-                #menu = Menus()
+                menu = Menus()
                 if employee_actions == 1:
-                    menu = Menus()
+                    #menu = Menus()
                     menu.menu_entry()
                     vector_menus.append(menu)
                 elif employee_actions == 2:
@@ -109,7 +107,7 @@ while True:
                     #drink.drink_entry()
                     #vector_drinks.append(drink)
                 elif employee_actions == 3:
-                    menus.mod_menu_name()
+                    mod_menu_price()
                 elif employee_actions == 4:
                     add_order_queue()
                 else:
