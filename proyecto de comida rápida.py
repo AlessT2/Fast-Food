@@ -141,6 +141,7 @@ class Customer:
 def crear_factura(cantid):
     information = []
     header = "Nombre; Apellido; NIT; Nombre de menú; Descripción del menú; Precio del menú\n"
+    information.append(header)
     customer = Customer()
     menus = Menus()
     print(customer.name, customer.last_name, customer.nit, menus.menu_name, menus.menu_description, menus.menu_price)
