@@ -5,6 +5,8 @@ vector_menus_description = []
 vector_drinks = []
 vector_drinks_price = []
 order_queue = queue.Queue()
+money = 0
+obtained = 0
 class Menus:
     def __init__(self, menu_name="", menu_description="", menu_price=""):
         self.menu_name = menu_name
@@ -37,8 +39,11 @@ class Drinks:
         vector_drinks_price.append(self.drink_price)
         print("La bebida se registro exitosamente")
 def apply_discount(price):
+    global obtained, money
     discount = 0.1  # Descuento del 10%
     discounted_price = price * (1 - discount)
+    obtained += discounted_price
+    money += obtained
     return discounted_price
 def mod_menu_price():
     print("Modificar precio del Menú")
@@ -59,22 +64,24 @@ def mod_menu_price():
         return "Aún no se han registrado menús"
 
 def add_order_queue():
-    print("Acciones de pedidos")
+    pendient = "\U0001F570"
+    proces = "\U0001F504"
+    print(f"\033[1;38;2;255;193;0m▼▲▼▲▼ Acciones de Pedidos {order} ▼▲▼▲▼\033[0;m \n")
     print("1. Pedidos pendientes")
     print("2. Pedido en preparación")
     print("3. Marcar pedido más antiguo listo para servir")
     try:
         order_actions = int(input("Ingrese que acción desea realizar: "))
         if order_actions == 1:
-            print("Los pedidos pendientes son: ",len(order_queue.queue))
+            print(f"\033[1;38;2;255;193;0m▼▲▼▲▼ Pedidos pendientes {pendient}: \033[0;m \n",len(order_queue.queue))
         elif order_actions == 2:
             while not order_queue.empty():
-                print("El pedido que se está preparando es: ",order_queue.queue[0])
+                print(f"\033[1;38;2;255;193;0m▼▲▼▲▼ El pedido que se está preparando es {proces}: \033[0;m \n",order_queue.queue[0])
                 break
             print("No hay pedidos preparándose")
         elif order_actions == 3:
             while not order_queue.empty():
-                print("El pedido que está listo para servir es: ",order_queue.get())
+                print(f"\033[1;38;2;255;193;0m▼▲▼▲▼ El pedido que está listo apra servir es {yes}: \033[0;m \n",order_queue.get())
                 crear_factura(total)
                 break
             print("No hay pedidos listos")
@@ -116,10 +123,10 @@ def get_queue():
                 s2 = search_menu2(vector_menus, food)
                 d2 = search_menu2(vector_drinks, food)
                 pay1 = food_pay(vector_menu_price,s2)
-                pay2 = drink_pay(vector_drinks_price, d2)
+                pay2 = drink_pay(vector_drinks_price, d2+1)
                 global total
                 total = pay1 + pay2
-                print(f"Total a pagar {total}")
+                print(f"Total a pagar {pay1} + {pay2} = {total}")
                 break
             print("No se encuentra esa bebida, intente otra vez")
         print("No se encuentra esa comida, intente otra vez")
@@ -192,19 +199,30 @@ class CustomersQueue(Menus):
         print("El cliente no está registrado. Por favor, ingrese a la opción A y luego regrese.")
 customers_queue = CustomersQueue()
 while True:
-    print("Roles")
-    print("1. Empleados")
-    print("2. Clientes ")
+    shop = "\U0001F3EA"
+    employee = "\U0001F468\U0000200D\U0001F4BC"
+    chef = "\U0001F468\U0000200D\U0001F373"
+    choose = "\U0001F914"
+    hamburger = "\U0001F354"
+    potato_chips = "\U0001F35F"
+    billet= "\U0001F4B5"
+    soda = "\U0001F964"
+    order = "\U0001F4DC"
+    computer = "\U0001F4BB"
+    print(f"\033[1;38;2;255;143;0m/\/\/\ Roles {shop} /\/\/\ \033[0;m")
+    print(f"\033[1;38;2;243;82;7m○○○○○ 1. Empleados {chef} ○○○○ \033[0;m")
+    print(f"\033[1;38;2;3;173;0m▬▬▬▬▬ 2. Clientes {employee} ▬▬▬▬▬ \033[0;m")
+    print(f"\033[1;38;2;0;147;255m▲▼▲▼▲▼  3. Sistema {computer} ▲▼▲▼▲▼  \033[0;m")
     try:
-        roles = int(input("Seleccione cual es su Rol: "))
+        roles = int(input(f"\033[1;38;2;229;240;0m {choose} Seleccione cual es su Rol: \033[0;m\n"))
         if roles == 1:
-            print("Acciones de empleados")
-            print("1. Agregar Menus")
-            print("2. Agregar Bebidas")
-            print("3. Modificar precio del menu")
-            print("4. Pedidos")
+            print(f"\033[1;38;2;243;82;7m▲▼▲▼▲▼ Acciones de empleados {chef} ▲▼▲▼▲▼ \033[0;m")
+            print(f"\033[1;38;2;240;197;0m///// 1. Agregar menús {hamburger}{potato_chips} ///// \033[0;m")
+            print(f"\033[1;38;2;0;171;240m ▼▬▼▬▼ 2. Agregar bebidas {soda} ▼▬▼▬▼ \033[0;m")
+            print(f"\033[1;38;2;0;240;171m▼$▼$▼ 3. Modificar precio del menu {billet}{hamburger}{potato_chips}{billet} ▼$▼$▼ \033[0;m")
+            print(f"\033[1;38;2;255;193;0m▼-▼-▼ 4. Pedidos {order} ▼-▼-▼ \033[0;m")
             try:
-                employee_actions = int(input("Ingrese que acción desea realizar: "))
+                employee_actions = int(input(f"\033[1;38;2;229;240;0m {choose} Ingrese que acción desea realizar: \033[0;m\n"))
                 if employee_actions == 1:
                     menu = Menus()
                     menu.menu_entry()
@@ -220,9 +238,15 @@ while True:
             except ValueError:
                 print("Por favor ingrese un valor válido de acciones para empleados")
         elif roles == 2:
-            print("Acciones de clientes")
-            menu = input("*****Pedidos*****\nA. Registrar cliente"
-            "\nB. Verificar su registro\nC. Cola de clientes\nD. Tipo de pago\nElija su opción: ").lower()
+            register = "\U0001F4DA"
+            yes = "\U00002705"
+            queue_custom = "\U0001F6B6\U0000200D\U00002642\U0000FE0F"
+            print(f"\033[1;38;2;3;173;0m○○○○○ Acciones de clientes {employee} ○○○○○ \033[0;m")
+            menu = input(f"\033[1;38;2;255;193;0m                   ▲-▲-▲ Pedidos {order} ▲-▲-▲ \033[0;m\n"+
+            f"\033[1;38;2;255;131;0m             ▲-▲-▲ A. Registrar cliente {register} ▲-▲-▲ \033[0;m\n"
+            f"\033[1;38;2;255;240;0m            ▲=▲=▲ B. Verificar su registro {yes} ▲=▲=▲ \033[0;m\n"
+            f"\033[1;38;2;243;8;236m            ▲▬▲▬▲ C. Cola de clientes {queue_custom}{queue_custom}{queue_custom} ▲▬▲▬▲ \033[0;m\n"
+            f"\033[1;38;2;229;240;0m{choose} Elija su opción: \033[0;m\n").lower()
             while menu == "a":
                 customers_queue.add_customer()
                 break
@@ -233,14 +257,16 @@ while True:
             while menu == "c":
                 customers_queue.display_customers()
                 break
-            while menu == "d":
-                break
-            while menu == "e":
-                break
             Continuar = input("\033[1;38;2;203;231;0m¿Desea continuar con el programa?\033[0;m\n" + "\033[1;38;2;162;233;29mS\033[0;m" + "/" + "\033[1;38;2;215;0;0mN \033[0;m").lower()
             if Continuar == "n":
                 print("\033[1;38;2;231;0;95mPrograma Finalizado\033[0;m\n")
                 break
+        elif roles == 3:
+            print(f"\033[1;38;2;0;147;255m▲▼▲▼▲▼  3. Sistema {computer} ▲▼▲▼▲▼  \033[0;m")
+            print(f"Menús disponibles: {vector_menus}{vector_menus_description}{vector_menu_price}")
+            print(f"Bebidas disponibles: {vector_drinks}{vector_drinks_price}")
+            print(f"Dinero actual: {money}")
+            print(f"Dinero obtenido: {obtained}")
         else:
             print("Por favor ingrese un valor entero entre 1 y 2 para seleccionar su Rol")
     except ValueError:
