@@ -30,10 +30,8 @@ class CustomersQueue:
         for customer in self.customers.queue:
             if customer.nit == nit:
                 print("El cliente está registrado.")
-                # Aquí se puede permitir que el cliente realice un pedido
                 return
         print("El cliente no está registrado. Por favor, regístrese.")
-        # Aquí se puede solicitar al cliente que se registre
 
 # Crear una nueva cola de clientes
 customers_queue = CustomersQueue()
@@ -49,6 +47,6 @@ customers_queue.display_customers()
 
 #ofertas especiales///////////////////////////////////////////////////////////////////////
 def apply_discount(price):
-    discount = 0.1  # Descuento del 10% (puedes ajustarlo según tus necesidades)
+    discount = 0.1
     discounted_price = price * (1 - discount)
     return discounted_price

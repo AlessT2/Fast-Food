@@ -1,4 +1,4 @@
-def crear_factura(information, header, string):
+def crear_factura():
     information = []
     header = "Nombre; Apellido; NIT; Nombre de menú; Descripción del menú; Precio del menú\n"
     information.append(header)
